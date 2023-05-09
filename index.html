@@ -6,31 +6,70 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-	<title>California Places to Visit</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <title>California Places to Visit</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        /* Special effects for the randomly generated location */
+        #randomPlace {
+            font-size: 36px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
 <body>
-	<header>
-		<h1>California Places to Visit</h1>
-		<nav>
-			<ul>
+    <header>
+        <h1>California Places to Visit</h1>
+        <nav>
+            <ul>
                 <button type="button" class="btn btn-primary mr-2" onclick="location.href='index.html'">Home</button>
                 <button type="button" class="btn btn-primary mr-2" onclick="location.href='theme-parks.html'">Theme Parks</button>
                 <button type="button" class="btn btn-primary mr-2" onclick="location.href='beaches.html'">Beaches</button>
                 <button type="button" class="btn btn-primary mr-2" onclick="location.href='national-parks.html'">National Parks</button>
                 <button type="button" class="btn btn-primary mr-2" onclick="location.href='food.html'">Food</button>
-			</ul>
-		</nav>
-	</header>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro">
+            <h2>Welcome to California</h2>
+            <p>California is a state located on the west coast of the United States. It is known for its beaches, national parks, theme parks, and diverse food culture. Explore some of the most popular places to visit in California below.</p>
+            <button id="random">Get a Random Location</button>
+            <p id="randomPlace"></p>
+            <p id="summary"></p>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById("random").addEventListener("click", function() {
+            var places = ["Yosemite National Park", "Disneyland", "Golden Gate Bridge", "Death Valley", "Santa Monica Pier", "Big Sur", "Hollywood Walk of Fame", "Lake Tahoe", "Sequoia National Park"];
+            var randomPlace = places[Math.floor(Math.random() * places.length)];
+            document.getElementById("randomPlace").innerHTML = "You should visit: " + randomPlace;
+
+            // Retrieve the summary from Wikipedia API
+            $.getJSON("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&explaintext&format=json&titles=" + randomPlace, function(data) {
+                var pages = data.query.pages;
+                var pageId = Object.keys(pages)[0];
+                var summary = pages[pageId].extract;
+                document.getElementById("summary").innerHTML = summary;
+            });
+        });
+    </script>
+    </body>
+	</html>
 	
-	<main>
-		<section id="intro">
-			<h2>Welcome to California</h2>
-			<p>California is a state located on the west coast of the United States. It is known for its beaches, national parks, theme parks, and diverse food culture. Explore some of the most popular places to visit in California below.</p>
-			<button id="random">Get a Random Location</button>
-		</section>
-	</main>
-	
-	<script src="script.js"></script>
-</body>
-</html>
