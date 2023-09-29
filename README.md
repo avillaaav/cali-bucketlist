@@ -1,4 +1,9 @@
-# cali-bucketlist
-CPSC 349 - Semester long project working on creating a website using HTML and CSS.
+# California Bucket List
 
-Each .html is a new webpage we have created, and our styling for our website is in style.css.
+**CPSC 349 - Semester-long project**: Creating a website using HTML and CSS to showcase the best of California.
+
+## Project Description
+
+Welcome to our California Bucket List project! We've created a website to highlight some of California's top attractions, including theme parks, beaches, national parks, and delicious food spots. Our styling is managed with the `style.css` file.
+
+Feel free to explore and enjoy the best of California from your browser!
